@@ -2,7 +2,7 @@ package com.tony.puzzle;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.tony.photoshader.PhotoShader;
+import com.tony.photoshader.WoodoKu;
 
 import kw.test.file.Bean;
 import kw.test.file.ReadFileConfig;
@@ -21,6 +21,6 @@ public class DesktopLauncher {
         config.height = (int)(1280 );
         config.width = (int) (720);
         config.stencil = 8;
-        new LwjglApplication(new PhotoShader(), config);
+        new LwjglApplication(new WoodoKu(), config);
     }
 }

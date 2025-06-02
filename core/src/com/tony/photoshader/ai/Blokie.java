@@ -216,8 +216,45 @@ public class Blokie {
             new BitBoard(262657, 0, 0),
             new BitBoard(1049601, 0, 0),
             new BitBoard(263172, 0, 0),
-            new BitBoard(515, 0, 0)
-            // ... continue adding from the original JS PIECES if needed
+            new BitBoard(515, 0, 0),
+            new BitBoard(1537, 0, 0),
+            new BitBoard(1538, 0, 0),
+            new BitBoard(1027, 0, 0),
+            new BitBoard(15, 0, 0),
+            new BitBoard(262657, 1, 0),
+            new BitBoard(1539, 0, 0),
+            new BitBoard(786945, 0, 0),
+            new BitBoard(3588, 0, 0),
+            new BitBoard(525315, 0, 0),
+            new BitBoard(519, 0, 0),
+            new BitBoard(262659, 0, 0),
+            new BitBoard(2055, 0, 0),
+            new BitBoard(787458, 0, 0),
+            new BitBoard(3585, 0, 0),
+            new BitBoard(3586, 0, 0),
+            new BitBoard(263681, 0, 0),
+            new BitBoard(525826, 0, 0),
+            new BitBoard(1031, 0, 0),
+            new BitBoard(3075, 0, 0),
+            new BitBoard(263682, 0, 0),
+            new BitBoard(525825, 0, 0),
+            new BitBoard(1542, 0, 0),
+            new BitBoard(31, 0, 0),
+            new BitBoard(262657, 513, 0),
+            new BitBoard(265729, 0, 0),
+            new BitBoard(525319, 0, 0),
+            new BitBoard(1836034, 0, 0),
+            new BitBoard(1052164, 0, 0),
+            new BitBoard(2567, 0, 0),
+            new BitBoard(787459, 0, 0),
+            new BitBoard(786947, 0, 0),
+            new BitBoard(3589, 0, 0),
+            new BitBoard(262663, 0, 0),
+            new BitBoard(1050631, 0, 0),
+            new BitBoard(1837060, 0, 0),
+            new BitBoard(1835521, 0, 0),
+            new BitBoard(527874, 0, 0)
+
     };
 
 //    public BitBoard getRandomPiece(Random rng) {
@@ -332,7 +369,7 @@ public class Blokie {
 
     // === TEST HARNESS ===
     public void runBasicTests() {
-        Random rng = new Random(42);
+        Random rng = new Random();
 
         GameState game = blokieAPI.getNewGame();
         int totalMoves = 0;
@@ -346,7 +383,7 @@ public class Blokie {
                 break;
             }
 
-            game = nextStates[2];
+            game = nextStates[3];
             totalMoves++;
             System.out.println("Move " + totalMoves + " | Score: " + game.getScore());
             System.out.println(game.getBoard());

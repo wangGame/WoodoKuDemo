@@ -45,6 +45,7 @@ public class BitBoard {
         return x.a == y.a && x.b == y.b && x.c == y.c;
     }
 
+    //有多少被占用
     public int count(BitBoard bb) {
         return popcount(bb.a) + popcount(bb.b) + popcount(bb.c);
     }
