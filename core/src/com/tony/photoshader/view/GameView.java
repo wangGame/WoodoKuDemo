@@ -34,26 +34,19 @@ public class GameView extends Group {
         Vector2 vector2 = new Vector2(baseBlockActor.getX(),baseBlockActor.getY());
         baseBlockActor.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
-        System.out.println(vector2);
-
-
-
 
 
         boolean flag = true;
         //开始检测
-        if (vector2.x>=0&&vector2.y>=0){
+        if (vector2.x>=-50&&vector2.y>=-500){
             int[][] data = baseBlockActor.getData();
-            int startX = (int) (vector2.x / 100);
-            int startY = (int) (vector2.y / 100);
-            System.out.println(startX+"=========="+startY);
+            int startX = Math.abs((int) ((vector2.x+50) / 100));
+            int startY = Math.abs((int) ((vector2.y+50) / 100));
             for (int i = 0; i < data.length; i++) {
                 for (int i1 = 0; i1 < data[0].length; i1++) {
                     if (startX+i<8 && startY+i1<8&&startX+i>=0 && startY+i1>=0) {
                         if (blockData[startX + i][startY + i1] == 1) {
                             flag = false;
-                        }else {
-
                         }
                     }else {
                         flag = false;
@@ -73,8 +66,8 @@ public class GameView extends Group {
         vector2.set(x,y);
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
-        int startX = (int) (vector2.x / 100);
-        int startY = (int) (vector2.y / 100);
+        int startX = Math.abs((int) ((vector2.x+50) / 100));
+        int startY = Math.abs((int) ((vector2.y+50) / 100));
         targetBlock.setPosition(vector2.x,vector2.y);
         targetBlock.addAction(Actions.moveTo(startX * 100,startY * 100,0.2f));
         addActor(targetBlock);

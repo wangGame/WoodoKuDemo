@@ -46,38 +46,46 @@ public class Woodoku extends BaseScreen {
         addActor(click);
         click.addListener(new ClickListener(){
             private Vector2 touchDownV2 = new Vector2();
-            private BlockGroup targetBlock;
+            private BaseBlockActor targetBlock;
+            private Vector2 touchDown = new Vector2();
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                boolean b = super.touchDown(event, x, y, pointer, button);
                 touchDownV2.set(x,y);
                 click.getParent().localToStageCoordinates(touchDownV2);
-                targetBlock = blockPanel.checkTouch(touchDownV2);
+                BlockGroup blockGroup = blockPanel.checkTouch(touchDownV2);
+                if (blockGroup == null)return b;
+                targetBlock = blockPanel.checkTouch(touchDownV2).getBlockActor1();
                 if (targetBlock!=null){
                     targetBlock.stageToLocalCoordinates(touchDownV2);
                 }
-                return super.touchDown(event, x, y, pointer, button);
+                touchDown.set(x,y);
+                return b;
             }
 
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (targetBlock!=null) {
-                    targetBlock.setPosition(x-touchDownV2.x, y-touchDownV2.y);
-//                    checkBlock(targetBlock, gameView);
+                    Vector2 vector2  = new Vector2();
+                    vector2.set(x,y);
+                    click.getParent().localToStageCoordinates(vector2);
+                    targetBlock.getParent().stageToLocalCoordinates(vector2);
+                    targetBlock.setPosition(vector2.x-touchDownV2.x,vector2.y-touchDownV2.y);
                 }
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-//                if (targetBlock!=null) {
-//                    boolean b = checkBlock(targetBlock, gameView);
-//                    if (b) {
-//                        gameView.addTagetBlock(targetBlock);
-//                    }else {
-//                        gameView.addAction(Actions.moveTo(0,0,Align.center));
-//                    }
-//                }
+                if (targetBlock!=null) {
+                    boolean b = checkBlock(targetBlock, gameView);
+                    if (b) {
+                        gameView.addTagetBlock(targetBlock);
+                    }else {
+                        targetBlock.addAction(Actions.moveTo(0,0,0.4f));
+                    }
+                }
             }
         });
     }
