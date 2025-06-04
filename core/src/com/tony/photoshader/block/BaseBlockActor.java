@@ -36,14 +36,13 @@ public abstract class BaseBlockActor extends Group {
 
     public BaseBlockActor(){
         initData();
-        setSize(30,30);
-        setDebug(true);
+
     }
 
     public abstract void initData();
 
     public void createBlock() {
-        setSize(arr.length*100,arr[0].length*100);
+        setSize(arr.length*100-10,arr[0].length*100-10);
         setDebug(true);
         for (int i = 0; i < arr.length; i++) {
             for (int i1 = 0; i1 < arr[0].length; i1++) {
