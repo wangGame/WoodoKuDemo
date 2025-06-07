@@ -4,13 +4,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
-import com.kw.gdx.constant.Constant;
-import com.tony.photoshader.block.BaseBlockActor;
 
 public class BlockPanel extends Group {
     private BlockGroup blockOne;
     private BlockGroup blockTwo;
     private BlockGroup blockThree;
+    private Vector2 tempV2 = new Vector2();
 
     public BlockPanel(){
         setSize(1080,300);
@@ -33,34 +32,51 @@ public class BlockPanel extends Group {
 
     }
 
+    public void setBlock(){
+        blockOne.genBlock();
+        blockTwo.genBlock();
+        blockThree.genBlock();
+    }
 
-    private Vector2 vv = new Vector2();
     public BlockGroup checkTouch(Vector2 touchDownV2) {
         {
-            vv.set(touchDownV2.x,touchDownV2.y);
-            blockOne.stageToLocalCoordinates(vv);
-            Actor hit = blockOne.hit(vv.x, vv.y, true);
+            tempV2.set(touchDownV2.x,touchDownV2.y);
+            blockOne.stageToLocalCoordinates(tempV2);
+            Actor hit = blockOne.hit(tempV2.x, tempV2.y, true);
             if (hit!=null){
                 return blockOne;
             }
         }
         {
-            vv.set(touchDownV2.x,touchDownV2.y);
-            blockTwo.stageToLocalCoordinates(vv);
-            Actor hit = blockTwo.hit(vv.x, vv.y, true);
+            tempV2.set(touchDownV2.x,touchDownV2.y);
+            blockTwo.stageToLocalCoordinates(tempV2);
+            Actor hit = blockTwo.hit(tempV2.x, tempV2.y, true);
             if (hit!=null){
                 return blockTwo;
             }
         }
         {
-            vv.set(touchDownV2.x,touchDownV2.y);
-            blockThree.stageToLocalCoordinates(vv);
-            Actor hit = blockThree.hit(vv.x, vv.y, true);
+            tempV2.set(touchDownV2.x,touchDownV2.y);
+            blockThree.stageToLocalCoordinates(tempV2);
+            Actor hit = blockThree.hit(tempV2.x, tempV2.y, true);
             if (hit!=null){
                 return blockThree;
             }
         }
 
         return null;
+    }
+
+    public boolean checkStatus() {
+        if (!blockOne.checkUsed()) {
+            return false;
+        }
+        if (!blockTwo.checkUsed()) {
+            return false;
+        }
+        if (!blockThree.checkUsed()) {
+            return false;
+        }
+        return true;
     }
 }

@@ -2,7 +2,6 @@ package com.tony.photoshader.screen;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -11,7 +10,6 @@ import com.kw.gdx.BaseGame;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.screen.BaseScreen;
 import com.tony.photoshader.block.BaseBlockActor;
-import com.tony.photoshader.block.BlockActor1;
 import com.tony.photoshader.view.BlockGroup;
 import com.tony.photoshader.view.BlockPanel;
 import com.tony.photoshader.view.GameView;
@@ -30,16 +28,10 @@ public class Woodoku extends BaseScreen {
         addActor(gameView);
         gameView.setPosition(Constant.GAMEWIDTH/2f,Constant.GAMEHIGHT/2f, Align.center);
 
-
         BlockPanel blockPanel = new BlockPanel();
+        blockPanel.setBlock();
         rootView.addActor(blockPanel);
-
-        BlockActor1 blockActor1 = new BlockActor1();
-        blockActor1.createBlock();
-//        rootView.addActor(blockActor1);
-
-
-
+        gameView.setBlockPanel(blockPanel);
 
         Actor click = new Actor();
         click.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
@@ -55,7 +47,7 @@ public class Woodoku extends BaseScreen {
                 click.getParent().localToStageCoordinates(touchDownV2);
                 BlockGroup blockGroup = blockPanel.checkTouch(touchDownV2);
                 if (blockGroup == null)return b;
-                targetBlock = blockPanel.checkTouch(touchDownV2).getBlockActor1();
+                targetBlock = blockPanel.checkTouch(touchDownV2).getBlock();
                 if (targetBlock!=null){
                     targetBlock.stageToLocalCoordinates(touchDownV2);
                 }
@@ -85,6 +77,7 @@ public class Woodoku extends BaseScreen {
                     }else {
                         targetBlock.addAction(Actions.moveTo(0,0,0.4f));
                     }
+                    targetBlock = null;
                 }
             }
         });
