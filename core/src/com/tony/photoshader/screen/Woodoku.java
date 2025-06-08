@@ -1,21 +1,27 @@
 package com.tony.photoshader.screen;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.kw.gdx.BaseGame;
+import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.screen.BaseScreen;
+import com.kw.gdx.utils.Layer;
 import com.tony.photoshader.block.BaseBlockActor;
 import com.tony.photoshader.view.BlockGroup;
 import com.tony.photoshader.view.BlockPanel;
 import com.tony.photoshader.view.GameView;
 
 public class Woodoku extends BaseScreen {
-
+    private GameView gameView;
+    private BlockPanel blockPanel;
     public Woodoku(BaseGame game) {
         super(game);
     }
@@ -24,11 +30,16 @@ public class Woodoku extends BaseScreen {
     public void initView() {
         super.initView();
 
-        GameView gameView = new GameView();
-        addActor(gameView);
+        Image bg = Layer.getShadow();
+        rootView.addActor(bg);
+        bg.setColor(Color.BROWN);
+        bg.setPosition(Constant.WIDTH/2f,Constant.HIGHT/2,Align.center);
+
+        gameView = new GameView();
+        rootView.addActor(gameView);
         gameView.setPosition(Constant.GAMEWIDTH/2f,Constant.GAMEHIGHT/2f, Align.center);
 
-        BlockPanel blockPanel = new BlockPanel();
+        blockPanel = new BlockPanel();
         blockPanel.setBlock();
         rootView.addActor(blockPanel);
         gameView.setBlockPanel(blockPanel);
@@ -76,11 +87,20 @@ public class Woodoku extends BaseScreen {
                         gameView.addTagetBlock(targetBlock);
                     }else {
                         targetBlock.addAction(Actions.moveTo(0,0,0.4f));
+                        if (!checkAll()) {
+                            setScreen(Woodoku.class);
+//                            touchDisable();
+                        }
                     }
                     targetBlock = null;
                 }
             }
         });
+    }
+
+    public boolean checkAll(){
+        Array<BaseBlockActor> allNotUse = blockPanel.getAllNotUse();
+        return gameView.checkBlockAll(allNotUse);
     }
 
     public boolean checkBlock(BaseBlockActor baseBlockActor,GameView gameView){

@@ -22,6 +22,7 @@ public class BlockGroup extends Group {
         blockActor.createBlock();
         addActor(blockActor);
         blockActor.setPosition(150,150, Align.center);
+        used = false;
     }
 
     public void setUsed(boolean used) {

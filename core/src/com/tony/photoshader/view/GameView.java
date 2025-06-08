@@ -1,11 +1,12 @@
 package com.tony.photoshader.view;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
-import com.sun.source.tree.InstanceOfTree;
+import com.kw.gdx.utils.Layer;
 import com.tony.photoshader.block.BaseBlockActor;
 
 public class GameView extends Group {
@@ -17,13 +18,20 @@ public class GameView extends Group {
         this.blockData = new int[8][8];
         setSize(8*100,8*100);
 
+
+        Image bg = Layer.getShadow();
+        addActor(bg);
+        bg.setColor(Color.GOLD);
+        bg.setSize(getWidth(),getHeight());
+
+
         this.boardGroup = new Group();
         this.boardGroup.setSize(getWidth(),getHeight());
         addActor(boardGroup);
         for (int i = 0; i < 8; i++) {
             for (int i1 = 0; i1 < 8; i1++) {
                 GameViewBlockGroup actor = new GameViewBlockGroup();
-                actor.setSize(100,100);
+
                 actor.setPosition(i*100,i1*100);
                 actor.setDebug(true);
                 actor.updateLabelPosition();
@@ -42,24 +50,32 @@ public class GameView extends Group {
         boolean flag = true;
         //开始检测
         if (vector2.x>=-50&&vector2.y>=-50){
-            int[][] data = baseBlockActor.getData();
             int startX = Math.abs((int) ((vector2.x+50) / 100));
             int startY = Math.abs((int) ((vector2.y+50) / 100));
-            for (int i = 0; i < data.length; i++) {
-                for (int i1 = 0; i1 < data[0].length; i1++) {
-                    if (startX+i<8 && startY+i1<8&&startX+i>=0 && startY+i1>=0) {
-                        if (data[i][i1] == 1) {
-                            if (blockData[startX + i][startY + i1] == 1) {
-                                flag = false;
-                            }
-                        }
-                    }else {
-                        flag = false;
-                    }
-                }
-            }
+            flag = check(baseBlockActor, startX,startY);
         }else {
             flag = false;
+        }
+        return flag;
+    }
+
+    private boolean check(BaseBlockActor baseBlockActor, int startX,int startY) {
+        boolean flag = true;
+        int[][] data = baseBlockActor.getData();
+        for (int i = 0; i < data.length; i++) {
+            for (int i1 = 0; i1 < data[0].length; i1++) {
+                if (startX+i<8 && startY+i1<8&&startX+i>=0 && startY+i1>=0) {
+                    if (data[i][i1] == 1) {
+                        if (blockData[startX + i][startY + i1] == 1) {
+                            flag = false;
+                            return flag;
+                        }
+                    }
+                }else {
+                    flag = false;
+                    return flag;
+                }
+            }
         }
         return flag;
     }
@@ -95,7 +111,6 @@ public class GameView extends Group {
                                     }
                                 }
                             }
-
                             if (blockPanel.checkStatus()) {
                                 blockPanel.setBlock();
                             }
@@ -161,5 +176,20 @@ public class GameView extends Group {
 
     public void setBlockPanel(BlockPanel blockPanel) {
         this.blockPanel = blockPanel;
+    }
+
+    public boolean checkBlockAll(Array<BaseBlockActor> allNotUse) {
+        for (int i = 0; i < blockData.length; i++) {
+            for (int i1 = 0; i1 < blockData[0].length; i1++) {
+                if (blockData[i][i1] == 0) {
+                    for (BaseBlockActor baseBlockActor : allNotUse) {
+                        if (check(baseBlockActor,i,i1)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

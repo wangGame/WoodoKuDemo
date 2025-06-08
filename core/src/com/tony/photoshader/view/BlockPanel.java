@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.tony.photoshader.block.BaseBlockActor;
 
 public class BlockPanel extends Group {
     private BlockGroup blockOne;
@@ -78,5 +80,19 @@ public class BlockPanel extends Group {
             return false;
         }
         return true;
+    }
+
+    public Array<BaseBlockActor> getAllNotUse(){
+        Array<BaseBlockActor> actors = new Array<>();
+        if (!blockOne.checkUsed()) {
+            actors.add(blockOne.getBlock());
+        }
+        if (!blockTwo.checkUsed()) {
+            actors.add(blockTwo.getBlock());
+        }
+        if (!blockThree.checkUsed()) {
+            actors.add(blockThree.getBlock());
+        }
+        return actors;
     }
 }
