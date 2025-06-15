@@ -18,12 +18,10 @@ public class GameView extends Group {
         this.blockData = new int[8][8];
         setSize(8*100,8*100);
 
-
         Image bg = Layer.getShadow();
         addActor(bg);
         bg.setColor(Color.GOLD);
         bg.setSize(getWidth(),getHeight());
-
 
         this.boardGroup = new Group();
         this.boardGroup.setSize(getWidth(),getHeight());
@@ -31,7 +29,6 @@ public class GameView extends Group {
         for (int i = 0; i < 8; i++) {
             for (int i1 = 0; i1 < 8; i1++) {
                 GameViewBlockGroup actor = new GameViewBlockGroup();
-
                 actor.setPosition(i*100,i1*100);
                 actor.setDebug(true);
                 actor.updateLabelPosition();
@@ -45,7 +42,6 @@ public class GameView extends Group {
         Vector2 vector2 = new Vector2(baseBlockActor.getX(),baseBlockActor.getY());
         baseBlockActor.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
-
 
         boolean flag = true;
         //开始检测
@@ -95,7 +91,7 @@ public class GameView extends Group {
 
         targetBlock.addAction(
                 Actions.sequence(
-                        Actions.moveTo(startX * 100,startY * 100,0.2f),
+                        Actions.moveTo(startX * 100,startY * 100,0.06f),
                         Actions.run(()->{
                             int[][] data = targetBlock.getData();
                             for (int i = 0; i < data.length; i++) {
@@ -191,5 +187,41 @@ public class GameView extends Group {
             }
         }
         return false;
+    }
+
+    public void resetColor() {
+        for (int i = 0; i < blockData.length; i++) {
+            for (int i1 = 0; i1 < blockData[0].length; i1++) {
+                GameViewBlockGroup gameViewBlockGroup = boardGroup.findActor(i + "" + i1);
+                gameViewBlockGroup.resetColor();
+            }
+        }
+    }
+
+    public void setCanMove(BaseBlockActor targetBlock) {
+        float x = targetBlock.getX();
+        float y = targetBlock.getY();
+        Vector2 vector2 = new Vector2();
+        vector2.set(x, y);
+
+        targetBlock.getParent().localToStageCoordinates(vector2);
+        stageToLocalCoordinates(vector2);
+
+        int startX = Math.abs((int) ((vector2.x + 50) / 100));
+        int startY = Math.abs((int) ((vector2.y + 50) / 100));
+
+        int[][] data = targetBlock.getData();
+        for (int i = 0; i < data.length; i++) {
+            for (int i1 = 0; i1 < data[0].length; i1++) {
+                int endX = startX + i;
+                int endY = startY + i1;
+                if (endX < 8 && endY < 8 && endX >= 0 && endY >= 0) {
+                    if (data[i][i1] == 1) {
+                        GameViewBlockGroup gameViewBlockGroup = boardGroup.findActor(endX + "" + endY);
+                        gameViewBlockGroup.setCanMoveColor();
+                    }
+                }
+            }
+        }
     }
 }

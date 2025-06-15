@@ -7,11 +7,6 @@ import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 
 public class BlockItem extends Group {
-    private Image left;
-    private Image right;
-    private Image up;
-    private Image down;
-
     public BlockItem(){
         setSize(100,100);
         Image bg = new Image(Asset.getAsset().getTexture("img/white.png"));
@@ -24,6 +19,5 @@ public class BlockItem extends Group {
         kuang.setColor(Color.GOLD);
         kuang.setSize(120,120);
         kuang.setPosition(50,50, Align.center);
-
     }
 }

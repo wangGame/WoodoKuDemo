@@ -37,7 +37,6 @@ public abstract class BaseBlockActor extends Group {
 
     public BaseBlockActor(){
         initData();
-
     }
 
     public abstract void initData();

@@ -75,6 +75,10 @@ public class Woodoku extends BaseScreen {
                     click.getParent().localToStageCoordinates(vector2);
                     targetBlock.getParent().stageToLocalCoordinates(vector2);
                     targetBlock.setPosition(vector2.x-touchDownV2.x,vector2.y-touchDownV2.y);
+                    gameView.resetColor();
+                    if(checkBlock(targetBlock, gameView)){
+                        gameView.setCanMove(targetBlock);
+                    }
                 }
             }
 

@@ -1,6 +1,8 @@
 package com.tony.photoshader.view;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
@@ -11,15 +13,27 @@ import com.tony.photoshader.block.BlockItem;
 public class GameViewBlockGroup extends Group {
     private Label label;
     private BlockItem blockItem;
+    private Image kuang;
+
     public GameViewBlockGroup(){
         setSize(100,100);
+
         Image bg = new Image(Asset.getAsset().getTexture("img/white.png"));
         addActor(bg);
-        bg.setSize(100,100);
+        bg.setSize(90,90);
+        bg.setPosition(50,50, Align.center);
+
+        kuang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
+        addActor(kuang);
+        kuang.setColor(Color.GRAY);
+        kuang.setSize(120,120);
+        kuang.setPosition(50,50, Align.center);
+
+
         label = new Label(0+"",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("font/Krub-Bold_redStroke_52.fnt");
         }});
-        addActor(label);
+//        addActor(label);
 
         blockItem = new BlockItem();
         addActor(blockItem);
@@ -34,12 +48,23 @@ public class GameViewBlockGroup extends Group {
     public void setLabelValue(int i) {
         label.setText(i+"");
         if (i == 1){
+            blockItem.setScale(1,1);
             blockItem.setVisible(true);
+            resetColor();
         }
     }
 
     public void resetLabelValue(){
         label.setText("0");
-        blockItem.setVisible(false);
+        blockItem.clearActions();
+        blockItem.addAction(Actions.scaleTo(0,0,0.1f));
+    }
+
+    public void setCanMoveColor() {
+        kuang.setColor(Color.RED);
+    }
+
+    public void resetColor() {
+        kuang.setColor(Color.GRAY);
     }
 }
