@@ -60,9 +60,9 @@ public class GameView extends Group {
         int[][] data = baseBlockActor.getData();
         for (int i = 0; i < data.length; i++) {
             for (int i1 = 0; i1 < data[0].length; i1++) {
-                if (startX+i<8 && startY+i1<8&&startX+i>=0 && startY+i1>=0) {
+                if (startX+i1<8 && startY+i<8&&startX+i1>=0 && startY+i>=0) {
                     if (data[i][i1] == 1) {
-                        if (blockData[startX + i][startY + i1] == 1) {
+                        if (blockData[startX + i1][startY + i] == 1) {
                             flag = false;
                             return flag;
                         }
@@ -96,8 +96,8 @@ public class GameView extends Group {
                             int[][] data = targetBlock.getData();
                             for (int i = 0; i < data.length; i++) {
                                 for (int i1 = 0; i1 < data[0].length; i1++) {
-                                    int endX = startX + i;
-                                    int endY = startY + i1;
+                                    int endX = startX + i1;
+                                    int endY = startY + i;
                                     if (endX<8 && endY<8&&endX>=0 && endY>=0) {
                                         if (data[i][i1] == 1) {
                                             blockData[endX][endY] = 1;
@@ -213,8 +213,8 @@ public class GameView extends Group {
         int[][] data = targetBlock.getData();
         for (int i = 0; i < data.length; i++) {
             for (int i1 = 0; i1 < data[0].length; i1++) {
-                int endX = startX + i;
-                int endY = startY + i1;
+                int endX = startX + i1;
+                int endY = startY + i;
                 if (endX < 8 && endY < 8 && endX >= 0 && endY >= 0) {
                     if (data[i][i1] == 1) {
                         GameViewBlockGroup gameViewBlockGroup = boardGroup.findActor(endX + "" + endY);
