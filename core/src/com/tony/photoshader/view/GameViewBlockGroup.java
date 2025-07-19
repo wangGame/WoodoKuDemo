@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.tony.photoshader.block.BlockItem;
+import com.tony.photoshader.constant.Constant;
 
 public class GameViewBlockGroup extends Group {
     private Label label;
@@ -15,19 +16,19 @@ public class GameViewBlockGroup extends Group {
     private Image kuang;
 
     public GameViewBlockGroup(){
-        setSize(100,100);
+        setSize(Constant.blockWidth,Constant.blockWidth);
 
         Image bg = new Image(Asset.getAsset().getTexture("img/white.png"));
-        addActor(bg);
-        bg.setSize(90,90);
-        bg.setPosition(50,50, Align.center);
+
+        bg.setSize(getWidth(),getWidth());
+        bg.setPosition(getWidth()/2f,getWidth()/2f, Align.center);
 
         kuang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
         addActor(kuang);
         kuang.setColor(Color.GRAY);
-        kuang.setSize(120,120);
-        kuang.setPosition(50,50, Align.center);
-
+        kuang.setSize(Constant.blockWidth+30,Constant.blockWidth+30);
+        kuang.setPosition(Constant.blockWidthHalf,Constant.blockWidthHalf, Align.center);
+        kuang.setColor(Color.RED);
 
         label = new Label(0+"",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("font/Krub-Bold_redStroke_52.fnt");
@@ -60,10 +61,10 @@ public class GameViewBlockGroup extends Group {
     }
 
     public void setCanMoveColor() {
-        kuang.setColor(Color.RED);
+        kuang.getColor().a = 1;
     }
 
     public void resetColor() {
-        kuang.setColor(Color.GRAY);
+        kuang.getColor().a = 0;
     }
 }

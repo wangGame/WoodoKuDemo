@@ -7,30 +7,28 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.tony.photoshader.block.BaseBlockActor;
 
-public class BlockPanel extends Group {
+public class BlockPanelLogic {
     private BlockGroup blockOne;
     private BlockGroup blockTwo;
     private BlockGroup blockThree;
     private Vector2 tempV2 = new Vector2();
 
-    public BlockPanel(){
-        setSize(1080,300);
-        setDebug(true);
+    public BlockPanelLogic(GameView gameView, Group rootView){
+        Group blockPanel = rootView.findActor("blockPanel");
+        Group blockOnePanel = blockPanel.findActor("blockOne");
+        blockOne = new BlockGroup(gameView);
+        blockOne.setPosition(100,100, Align.center);
+        blockOnePanel.addActor(blockOne);
 
-        blockOne = new BlockGroup();
-        blockOne.setPosition(180,150, Align.center);
-        blockOne.setDebug(true);
-        addActor(blockOne);
+        Group blockTwoPanel = blockPanel.findActor("blockTwo");
+        blockTwo = new BlockGroup(gameView);
+        blockTwo.setPosition(100,100, Align.center);
+        blockTwoPanel.addActor(blockTwo);
 
-        blockTwo = new BlockGroup();
-        blockTwo.setPosition(360+180,150, Align.center);
-        blockTwo.setDebug(true);
-        addActor(blockTwo);
-
-        blockThree = new BlockGroup();
-        blockThree.setPosition(720+180,150, Align.center);
-        blockThree.setDebug(true);
-        addActor(blockThree);
+        Group blockThreePanel = blockPanel.findActor("blockThree");
+        blockThree = new BlockGroup(gameView);
+        blockThree.setPosition(100,100, Align.center);
+        blockThreePanel.addActor(blockThree);
 
     }
 

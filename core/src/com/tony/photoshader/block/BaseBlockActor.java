@@ -46,21 +46,15 @@ public abstract class BaseBlockActor extends Group {
     public abstract void initData();
 
     public void createBlock() {
-//        Label label = new Label(getClass().getSimpleName()+"", new Label.LabelStyle(){{
-//            font = Asset.getAsset().loadBitFont("font/Krub-Bold_redStroke_52.fnt");
-//        }});
-//        addActor(label);
         setSize(arr[0].length*Constant.blockWidth,arr.length*Constant.blockWidth);
-        setDebug(true);
         setOrigin(Align.center);
-        setScale(0.8f);
+        setScale(0.6f);
         for (int i = 0; i < arr.length; i++) {
             for (int i1 = 0; i1 < arr[0].length; i1++) {
                 if (arr[i][i1] == 1) {
                     BlockItem actor = new BlockItem();
                     actor.setSize(Constant.blockWidth, Constant.blockWidth);
                     actor.setPosition(i1 * Constant.blockWidth,  i* Constant.blockWidth);
-                    actor.setDebug(true);
                     addActor(actor);
                 }
             }

@@ -1,0 +1,348 @@
+{
+  "ID": "656510d8-1231-4bd7-9c2a-38248b3322f3",
+  "Version": "3.10.0.0",
+  "Name": "Success",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 44,
+        "Children": [
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 150,
+              "G": 200
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "Tag": 46,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "success/successBg.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 960.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 45,
+                "ActionTag": -1092886984,
+                "Size": {
+                  "X": 1080.0,
+                  "Y": 1920.0
+                },
+                "Name": "successBg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "success/bestlabel.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 1377.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.7172
+                },
+                "PreSize": {
+                  "X": 0.7056,
+                  "Y": 0.0635
+                },
+                "LeftMargin": 159.0,
+                "RightMargin": 159.0,
+                "TopMargin": 482.0,
+                "BottomMargin": 1316.0,
+                "Tag": 47,
+                "ActionTag": 634780763,
+                "Size": {
+                  "X": 762.0,
+                  "Y": 122.0
+                },
+                "Name": "bestlabelTitle",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "success/btn.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 497.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.2589
+                },
+                "PreSize": {
+                  "X": 0.5981,
+                  "Y": 0.0823
+                },
+                "LeftMargin": 217.0,
+                "RightMargin": 217.0,
+                "TopMargin": 1344.0,
+                "BottomMargin": 418.0,
+                "Tag": 48,
+                "ActionTag": 310934918,
+                "Size": {
+                  "X": 646.0,
+                  "Y": 158.0
+                },
+                "Name": "cotinueBtn",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "success/huangguan.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 1561.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.813
+                },
+                "PreSize": {
+                  "X": 0.2056,
+                  "Y": 0.0823
+                },
+                "LeftMargin": 429.0,
+                "RightMargin": 429.0,
+                "TopMargin": 280.0,
+                "BottomMargin": 1482.0,
+                "Tag": 50,
+                "ActionTag": 1738592891,
+                "Size": {
+                  "X": 222.0,
+                  "Y": 158.0
+                },
+                "Name": "huangguan",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "12222",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "font/FranklinGothic-Heavy_188_1.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 923.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.4807
+                },
+                "PreSize": {
+                  "X": 0.4944,
+                  "Y": 0.1115
+                },
+                "LeftMargin": 273.0,
+                "RightMargin": 273.0,
+                "TopMargin": 890.0,
+                "BottomMargin": 816.0,
+                "Tag": 53,
+                "ActionTag": 20577614,
+                "Size": {
+                  "X": 534.0,
+                  "Y": 214.0
+                },
+                "Name": "currentLevelLabel",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "success/score.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 540.0,
+                  "Y": 1133.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5901
+                },
+                "PreSize": {
+                  "X": 0.1417,
+                  "Y": 0.0271
+                },
+                "LeftMargin": 463.5,
+                "RightMargin": 463.5,
+                "TopMargin": 761.0,
+                "BottomMargin": 1107.0,
+                "Tag": 51,
+                "ActionTag": -1860252736,
+                "Size": {
+                  "X": 153.0,
+                  "Y": 52.0
+                },
+                "Name": "score",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -32873421,
+            "Size": {
+              "X": 1080.0,
+              "Y": 1920.0
+            },
+            "Name": "rootView",
+            "ctype": "PanelObjectData"
+          }
+        ],
+        "Size": {
+          "X": 1080.0,
+          "Y": 1920.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "font/FranklinGothic-Heavy_188_1.fnt",
+        "font/FranklinGothic-Heavy_188_1.png",
+        "success/bestlabel.png",
+        "success/btn.png",
+        "success/huangguan.png",
+        "success/score.png",
+        "success/successBg.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

@@ -1,9 +1,15 @@
 package com.tony.photoshader.block;
 
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+
 public class BlockManager {
 
     public static BaseBlockActor getBaseBlockActor(){
         int value = (int) (1+(Math.random() * 17));
+        return getBaseBlockActor(value);
+    }
+
+    public static BaseBlockActor getBaseBlockActor(int value){
         System.out.println(value);
         if (value == 1){
             return new BlockOne();
@@ -44,4 +50,5 @@ public class BlockManager {
         }
         return new BlockOne();
     }
+
 }

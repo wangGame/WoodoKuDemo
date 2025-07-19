@@ -1,0 +1,17 @@
+info face="FranklinGothic-Heavy" size=214 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0
+common lineHeight=214 base=173 scaleW=256 scaleH=256 pages=1 packed=0
+page id=0 file="FranklinGothic-Heavy_188_1.png"
+chars count=12
+char id=10      x=0    y=0    width=0    height=0    xoffset=-2   yoffset=0    xadvance=0    page=0    chnl=0 
+char id=32      x=0    y=0    width=0    height=0    xoffset=-202 yoffset=-27  xadvance=45   page=0    chnl=0 
+char id=48      x=119  y=60   width=102  height=140  xoffset=2    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=49      x=121  y=210  width=100  height=138  xoffset=8    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=50      x=229  y=212  width=100  height=138  xoffset=2    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=51      x=8    y=356  width=106  height=140  xoffset=-1   yoffset=45   xadvance=108  page=0    chnl=0 
+char id=52      x=122  y=358  width=107  height=138  xoffset=1    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=53      x=237  y=358  width=104  height=138  xoffset=1    yoffset=47   xadvance=108  page=0    chnl=0 
+char id=54      x=8    y=60   width=103  height=140  xoffset=2    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=55      x=229  y=68   width=96   height=136  xoffset=5    yoffset=47   xadvance=108  page=0    chnl=0 
+char id=56      x=8    y=208  width=105  height=140  xoffset=1    yoffset=45   xadvance=108  page=0    chnl=0 
+char id=57      x=349  y=356  width=103  height=140  xoffset=1    yoffset=45   xadvance=108  page=0    chnl=0 
+kernings count=0

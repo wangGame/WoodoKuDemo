@@ -1,27 +1,20 @@
 package com.tony.photoshader.view;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
-import com.kw.gdx.utils.Layer;
 import com.tony.photoshader.block.BaseBlockActor;
+import com.tony.photoshader.constant.Constant;
 
 public class GameView extends Group {
     private int[][] blockData;
     private Group boardGroup;
-    private BlockPanel blockPanel;
+    private BlockPanelLogic blockPanelLogic;
     public GameView(){
-        setDebug(true);
         this.blockData = new int[8][8];
-        setSize(8*100,8*100);
+        setSize(966,966);
 
-        Image bg = Layer.getShadow();
-        addActor(bg);
-        bg.setColor(Color.GOLD);
-        bg.setSize(getWidth(),getHeight());
 
         this.boardGroup = new Group();
         this.boardGroup.setSize(getWidth(),getHeight());
@@ -29,8 +22,7 @@ public class GameView extends Group {
         for (int i = 0; i < 8; i++) {
             for (int i1 = 0; i1 < 8; i1++) {
                 GameViewBlockGroup actor = new GameViewBlockGroup();
-                actor.setPosition(i*100,i1*100);
-                actor.setDebug(true);
+                actor.setPosition(3 + i* Constant.blockWidth,3 + i1*Constant.blockWidth);
                 actor.updateLabelPosition();
                 boardGroup.addActor(actor);
                 actor.setName(i+""+i1);
@@ -45,9 +37,9 @@ public class GameView extends Group {
 
         boolean flag = true;
         //开始检测
-        if (vector2.x>=-50&&vector2.y>=-50){
-            int startX = Math.abs((int) ((vector2.x+50) / 100));
-            int startY = Math.abs((int) ((vector2.y+50) / 100));
+        if (vector2.x>=-Constant.blockWidthHalf&&vector2.y>=-Constant.blockWidthHalf){
+            int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
+            int startY = Math.abs((int) ((vector2.y+Constant.blockWidthHalf) / Constant.blockWidth));
             flag = check(baseBlockActor, startX,startY);
         }else {
             flag = false;
@@ -85,13 +77,13 @@ public class GameView extends Group {
         blockGroup.setUsed(true);
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
-        int startX = Math.abs((int) ((vector2.x+50) / 100));
-        int startY = Math.abs((int) ((vector2.y+50) / 100));
+        int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
+        int startY = Math.abs((int) ((vector2.y+Constant.blockWidthHalf) / Constant.blockWidth));
         targetBlock.setPosition(vector2.x,vector2.y);
 
         targetBlock.addAction(
                 Actions.sequence(
-                        Actions.moveTo(startX * 100,startY * 100,0.06f),
+                        Actions.moveTo(startX * Constant.blockWidth,startY * Constant.blockWidth,0.06f),
                         Actions.run(()->{
                             int[][] data = targetBlock.getData();
                             for (int i = 0; i < data.length; i++) {
@@ -107,14 +99,14 @@ public class GameView extends Group {
                                     }
                                 }
                             }
-                            if (blockPanel.checkStatus()) {
-                                blockPanel.setBlock();
+                            if (blockPanelLogic.checkStatus()) {
+                                blockPanelLogic.setBlock();
                             }
 
                              checkBlockActor();
                         })
-//                        ,
-//                        Actions.removeActor()
+                        ,
+                        Actions.removeActor()
                 )
         );
         addActor(targetBlock);
@@ -171,8 +163,8 @@ public class GameView extends Group {
         }
     }
 
-    public void setBlockPanel(BlockPanel blockPanel) {
-        this.blockPanel = blockPanel;
+    public void setBlockPanel(BlockPanelLogic blockPanelLogic) {
+        this.blockPanelLogic = blockPanelLogic;
     }
 
     public boolean checkBlockAll(Array<BaseBlockActor> allNotUse) {
@@ -208,8 +200,8 @@ public class GameView extends Group {
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
 
-        int startX = Math.abs((int) ((vector2.x + 50) / 100));
-        int startY = Math.abs((int) ((vector2.y + 50) / 100));
+        int startX = Math.abs((int) ((vector2.x + Constant.blockWidthHalf) / Constant.blockWidth));
+        int startY = Math.abs((int) ((vector2.y + Constant.blockWidthHalf) / Constant.blockWidth));
 
         int[][] data = targetBlock.getData();
         for (int i = 0; i < data.length; i++) {
@@ -224,5 +216,37 @@ public class GameView extends Group {
                 }
             }
         }
+    }
+
+
+    public boolean checkArr(int[][] block) {
+        int boardRows = blockData.length;
+        int boardCols = blockData[0].length;
+        int blockRows = block.length;
+        int blockCols = block[0].length;
+
+        for (int y = 0; y <= boardRows - blockRows; y++) {
+            for (int x = 0; x <= boardCols - blockCols; x++) {
+                if (canPlaceAt(blockData, block, x, y)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private  boolean canPlaceAt(int[][] board, int[][] block, int startX, int startY) {
+        for (int i = 0; i < block.length; i++) {
+            for (int j = 0; j < block[0].length; j++) {
+                if (block[i][j] == 1) {
+                    int boardY = startY + i;
+                    int boardX = startX + j;
+                    if (board[boardY][boardX] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

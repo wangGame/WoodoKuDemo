@@ -8,9 +8,10 @@ import com.tony.photoshader.block.BlockManager;
 public class BlockGroup extends Group {
     private BaseBlockActor blockActor;
     private boolean used;
-
-    public BlockGroup(){
+    private GameView gameView;
+    public BlockGroup(GameView gameView){
         setSize(300,300);
+        this.gameView = gameView;
     }
 
     public BaseBlockActor getBlock() {
@@ -19,14 +20,18 @@ public class BlockGroup extends Group {
 
     public void genBlock(){
         blockActor = BlockManager.getBaseBlockActor();
-        int[][] data = blockActor.getData();
-//        for (int i = 0; i < data.length; i++) {
-//            for (int i1 = 0; i1 < data[0].length; i1++) {
-//                System.out.print(data[data.length - 1 - i][i1]);
-//            }
-//            System.out.println();
-//        }
-
+        int index = 10;
+        while (!gameView.checkArr(blockActor.getData())) {
+            blockActor = BlockManager.getBaseBlockActor();
+            index -- ;
+            if (index<=0)break;
+        }
+        for (int i = 0; i < 18; i++) {
+            blockActor = BlockManager.getBaseBlockActor();
+            if (gameView.checkArr(blockActor.getData())) {
+                break;
+            }
+        }
         blockActor.createBlock();
         addActor(blockActor);
         blockActor.setPosition(150,150, Align.center);
@@ -40,4 +45,5 @@ public class BlockGroup extends Group {
     public boolean checkUsed(){
         return used;
     }
+
 }
