@@ -2,8 +2,8 @@ package com.tony.photoshader.block;
 
 public class BlockTwo extends BaseBlockActor{
     /**
-     *  *
-     *  *
+     *  **
+     *   **
      *
      */
     @Override

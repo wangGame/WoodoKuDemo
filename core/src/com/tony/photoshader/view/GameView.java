@@ -112,8 +112,9 @@ public class GameView extends Group {
                             }
 
                              checkBlockActor();
-                        }),
-                        Actions.removeActor()
+                        })
+//                        ,
+//                        Actions.removeActor()
                 )
         );
         addActor(targetBlock);

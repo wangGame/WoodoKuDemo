@@ -62,6 +62,8 @@ public class Woodoku extends BaseScreen {
                 if (targetBlock!=null){
                     targetBlock.stageToLocalCoordinates(touchDownV2);
                 }
+                targetBlock.setOrigin(Align.center);
+                targetBlock.setScale(1,1);
                 touchDown.set(x,y);
                 return b;
             }
@@ -90,7 +92,12 @@ public class Woodoku extends BaseScreen {
                     if (b) {
                         gameView.addTagetBlock(targetBlock);
                     }else {
-                        targetBlock.addAction(Actions.moveTo(0,0,0.4f));
+                        targetBlock.addAction(
+                                Actions.parallel(
+                                        Actions.moveToAligned(150,150,Align.center,0.1f),
+                                        Actions.scaleTo(0.8f,0.8f,0.1f)
+                                )
+                        );
                         if (!checkAll()) {
                             setScreen(Woodoku.class);
 //                            touchDisable();
