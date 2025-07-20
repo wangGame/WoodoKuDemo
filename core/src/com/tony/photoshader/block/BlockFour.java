@@ -10,6 +10,7 @@ public class BlockFour extends BaseBlockActor{
 
     @Override
     public void initData() {
+        index = 4;
         blockArrData = new int[3][2];
         blockArrData[0][0] = 1;
         blockArrData[0][1] = 0;

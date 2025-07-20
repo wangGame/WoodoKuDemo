@@ -17,6 +17,7 @@ public class BlockSevenTeen extends BaseBlockActor{
 
     @Override
     public void initData() {
+        index = 17;
         blockArrData = new int[5][1];
         blockArrData[0][0] = 1;
         blockArrData[1][0] = 1;

@@ -13,6 +13,7 @@ import com.kw.gdx.constant.Constant;
 import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.tony.photoshader.block.BaseBlockActor;
+import com.tony.photoshader.constant.BConstant;
 import com.tony.photoshader.view.BottomBlockItem;
 import com.tony.photoshader.view.BottomBlockLogic;
 import com.tony.photoshader.view.GameView;
@@ -21,6 +22,7 @@ import com.tony.photoshader.view.GameView;
 public class WoodokuScreen extends BaseScreen {
     private GameView gameView;
     private BottomBlockLogic bottomBlockLogic;
+
     public WoodokuScreen(BaseGame game) {
         super(game);
     }
@@ -87,6 +89,7 @@ public class WoodokuScreen extends BaseScreen {
                 if (targetBlock!=null) {
                     if (checkBlock(targetBlock, gameView)) {
                         gameView.addTagetBlock(targetBlock);
+                        BConstant.score+=targetBlock.getScore();
                     }else {
                         targetBlock.addAction(
                                 Actions.parallel(

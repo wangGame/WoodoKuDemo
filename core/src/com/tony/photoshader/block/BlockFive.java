@@ -8,6 +8,7 @@ public class BlockFive extends BaseBlockActor{
 
     @Override
     public void initData() {
+        index = 5;
         blockArrData = new int[2][2];
         blockArrData[0][0] = 1;
         blockArrData[0][1] = 0;

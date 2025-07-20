@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 import com.tony.photoshader.block.BaseBlockActor;
-import com.tony.photoshader.constant.Constant;
+import com.tony.photoshader.constant.BConstant;
 
 public class GameView extends Group {
     private int[][] blockData;
@@ -20,7 +20,7 @@ public class GameView extends Group {
         for (int i = 0; i < 8; i++) {
             for (int i1 = 0; i1 < 8; i1++) {
                 GameViewBlockGroup actor = new GameViewBlockGroup();
-                actor.setPosition(3 + i* Constant.blockWidth,3 + i1*Constant.blockWidth);
+                actor.setPosition(3 + i* BConstant.blockWidth,3 + i1* BConstant.blockWidth);
                 actor.updateLabelPosition();
                 boardGroup.addActor(actor);
                 actor.setName(i+""+i1);
@@ -35,9 +35,9 @@ public class GameView extends Group {
 
         boolean flag = true;
         //开始检测
-        if (vector2.x>=-Constant.blockWidthHalf&&vector2.y>=-Constant.blockWidthHalf){
-            int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
-            int startY = Math.abs((int) ((vector2.y+Constant.blockWidthHalf) / Constant.blockWidth));
+        if (vector2.x>=-BConstant.blockWidthHalf&&vector2.y>=-BConstant.blockWidthHalf){
+            int startX = Math.abs((int) ((vector2.x+ BConstant.blockWidthHalf) / BConstant.blockWidth));
+            int startY = Math.abs((int) ((vector2.y+ BConstant.blockWidthHalf) / BConstant.blockWidth));
             flag = check(baseBlockActor, startX,startY);
         }else {
             flag = false;
@@ -75,13 +75,13 @@ public class GameView extends Group {
         bottomBlockItem.setUsed(true);
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
-        int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
-        int startY = Math.abs((int) ((vector2.y+Constant.blockWidthHalf) / Constant.blockWidth));
+        int startX = Math.abs((int) ((vector2.x+ BConstant.blockWidthHalf) / BConstant.blockWidth));
+        int startY = Math.abs((int) ((vector2.y+ BConstant.blockWidthHalf) / BConstant.blockWidth));
         targetBlock.setPosition(vector2.x,vector2.y);
         resetColor();
         targetBlock.addAction(
                 Actions.sequence(
-                        Actions.moveTo(startX * Constant.blockWidth,startY * Constant.blockWidth,0.06f),
+                        Actions.moveTo(startX * BConstant.blockWidth,startY * BConstant.blockWidth,0.06f),
                         Actions.run(()->{
                             int[][] data = targetBlock.getData();
                             for (int i = 0; i < data.length; i++) {
@@ -139,6 +139,10 @@ public class GameView extends Group {
             }
         }
 
+        BConstant.score+= (shuizhi.size + shuiping.size) * BConstant.currentScoreBs;
+        if (shuiping.size>0 ||shuizhi.size>0){
+            BConstant.currentScoreBs += 10;
+        }
         resetValue(shuiping,shuizhi);
     }
 
@@ -197,8 +201,8 @@ public class GameView extends Group {
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
 
-        int startX = Math.abs((int) ((vector2.x + Constant.blockWidthHalf) / Constant.blockWidth));
-        int startY = Math.abs((int) ((vector2.y + Constant.blockWidthHalf) / Constant.blockWidth));
+        int startX = Math.abs((int) ((vector2.x + BConstant.blockWidthHalf) / BConstant.blockWidth));
+        int startY = Math.abs((int) ((vector2.y + BConstant.blockWidthHalf) / BConstant.blockWidth));
 
         int[][] data = targetBlock.getData();
         for (int i = 0; i < data.length; i++) {
@@ -246,5 +250,15 @@ public class GameView extends Group {
             }
         }
         return true;
+    }
+
+    public int[][] getBoardCopy() {
+        int cpy[][] = new int[blockData.length][blockData[0].length];
+        for (int i = 0; i < blockData.length; i++) {
+            for (int i1 = 0; i1 < blockData[0].length; i1++) {
+                cpy[i][i1] = blockData[i][i1];
+            }
+        }
+        return cpy;
     }
 }

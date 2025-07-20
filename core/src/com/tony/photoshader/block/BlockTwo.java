@@ -8,6 +8,7 @@ public class BlockTwo extends BaseBlockActor{
      */
     @Override
     public void initData() {
+        index = 2;
         blockArrData = new int[2][3];
         blockArrData[0][0] = 1;
         blockArrData[0][1] = 1;

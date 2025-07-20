@@ -15,6 +15,7 @@ public class BlockThirteen extends BaseBlockActor{
 
     @Override
     public void initData() {
+        index = 13;
         blockArrData = new int[2][3];
         blockArrData[0][0] = 1;
         blockArrData[0][1] = 1;

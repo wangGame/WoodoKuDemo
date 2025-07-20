@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.tony.photoshader.block.BlockItem;
-import com.tony.photoshader.constant.Constant;
+import com.tony.photoshader.constant.BConstant;
 
 public class GameViewBlockGroup extends Group {
     private Label label;
@@ -16,7 +16,7 @@ public class GameViewBlockGroup extends Group {
     private Image tipKUang;
 
     public GameViewBlockGroup(){
-        setSize(Constant.blockWidth,Constant.blockWidth);
+        setSize(BConstant.blockWidth, BConstant.blockWidth);
 
         Image bg = new Image(Asset.getAsset().getTexture("img/white.png"));
 
@@ -26,8 +26,8 @@ public class GameViewBlockGroup extends Group {
         tipKUang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
         addActor(tipKUang);
 
-        tipKUang.setSize(Constant.blockWidth+30,Constant.blockWidth+30);
-        tipKUang.setPosition(Constant.blockWidthHalf,Constant.blockWidthHalf, Align.center);
+        tipKUang.setSize(BConstant.blockWidth+30, BConstant.blockWidth+30);
+        tipKUang.setPosition(BConstant.blockWidthHalf, BConstant.blockWidthHalf, Align.center);
         tipKUang.setColor(Color.RED);
         tipKUang.getColor().a = 0;
         label = new Label(0+"",new Label.LabelStyle(){{

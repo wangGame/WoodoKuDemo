@@ -1,10 +1,21 @@
 package com.tony.photoshader.block;
 
+import com.badlogic.gdx.utils.Array;
+
 public class BlockManager {
 
     public static BaseBlockActor getBaseBlockActor() {
+        Array<Integer> all = new Array<>();
+        for (int i = 1; i <= 18; i++) {
+            all.add(i);
+        }
         int value = (int) (1 + (Math.random() * 17));
         return getBaseBlockActor(value);
+    }
+
+    public static int  randomNum(){
+        int value = (int) (1 + (Math.random() * 17));
+        return value;
     }
 
     public static BaseBlockActor getBaseBlockActor(int value) {

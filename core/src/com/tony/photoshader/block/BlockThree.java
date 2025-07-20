@@ -9,6 +9,7 @@ public class BlockThree extends BaseBlockActor{
 
     @Override
     public void initData() {
+        index = 3;
         blockArrData = new int[3][2];
         blockArrData[0][0] = 1;
         blockArrData[0][1] = 1;
