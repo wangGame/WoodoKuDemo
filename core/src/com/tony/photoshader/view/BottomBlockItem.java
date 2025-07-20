@@ -5,29 +5,27 @@ import com.badlogic.gdx.utils.Align;
 import com.tony.photoshader.block.BaseBlockActor;
 import com.tony.photoshader.block.BlockManager;
 
-public class BlockGroup extends Group {
+public class BottomBlockItem extends Group {
     private BaseBlockActor blockActor;
     private boolean used;
     private GameView gameView;
-    public BlockGroup(GameView gameView){
+
+    public BottomBlockItem(GameView gameView){
         setSize(300,300);
         this.gameView = gameView;
     }
 
-    public BaseBlockActor getBlock() {
-        return blockActor;
-    }
-
     public void genBlock(){
         blockActor = BlockManager.getBaseBlockActor();
-        int index = 10;
+        int tryTimes = 10;
         while (!gameView.checkArr(blockActor.getData())) {
             blockActor = BlockManager.getBaseBlockActor();
-            index -- ;
-            if (index<=0)break;
+            tryTimes ++ ;
+            if (tryTimes<=0)break;
         }
+        //如果尝试几次失败后，那么就遍历，如果遍历也就不了它，只能等死了
         for (int i = 0; i < 18; i++) {
-            blockActor = BlockManager.getBaseBlockActor();
+            blockActor = BlockManager.getBaseBlockActor(i);
             if (gameView.checkArr(blockActor.getData())) {
                 break;
             }
@@ -46,4 +44,7 @@ public class BlockGroup extends Group {
         return used;
     }
 
+    public BaseBlockActor getBlock() {
+        return blockActor;
+    }
 }

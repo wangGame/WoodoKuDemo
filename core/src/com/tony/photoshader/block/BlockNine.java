@@ -4,12 +4,10 @@ package com.tony.photoshader.block;
  * Author by tony
  * Date on 2025/7/18.
  */
-public class BlockNine extends BaseBlockActor{
+public class BlockNine extends BaseBlockActor {
     /**
-     *   **
-     *   *
-     *
-     *
+     * **
+     * *
      */
 
     @Override

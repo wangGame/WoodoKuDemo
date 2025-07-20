@@ -10,12 +10,10 @@ import com.tony.photoshader.constant.Constant;
 public class GameView extends Group {
     private int[][] blockData;
     private Group boardGroup;
-    private BlockPanelLogic blockPanelLogic;
+    private BottomBlockLogic bottomBlockLogic;
     public GameView(){
         this.blockData = new int[8][8];
         setSize(966,966);
-
-
         this.boardGroup = new Group();
         this.boardGroup.setSize(getWidth(),getHeight());
         addActor(boardGroup);
@@ -73,8 +71,8 @@ public class GameView extends Group {
         float y = targetBlock.getY();
         Vector2 vector2 = new Vector2();
         vector2.set(x,y);
-        BlockGroup blockGroup = (BlockGroup) targetBlock.getParent();
-        blockGroup.setUsed(true);
+        BottomBlockItem bottomBlockItem = (BottomBlockItem) targetBlock.getParent();
+        bottomBlockItem.setUsed(true);
         targetBlock.getParent().localToStageCoordinates(vector2);
         stageToLocalCoordinates(vector2);
         int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
@@ -94,13 +92,13 @@ public class GameView extends Group {
                                         if (data[i][i1] == 1) {
                                             blockData[endX][endY] = 1;
                                             GameViewBlockGroup gameViewBlockGroup = boardGroup.findActor(endX + "" + endY);
-                                            gameViewBlockGroup.setLabelValue(1,targetBlock.getBlockName());
+                                            gameViewBlockGroup.setLabelValue(1,targetBlock.getBlockColorName());
                                         }
                                     }
                                 }
                             }
-                            if (blockPanelLogic.checkStatus()) {
-                                blockPanelLogic.setBlock();
+                            if (bottomBlockLogic.checkStatus()) {
+                                bottomBlockLogic.setBlock();
                             }
                              checkBlockActor();
                         })
@@ -162,8 +160,8 @@ public class GameView extends Group {
         }
     }
 
-    public void setBlockPanel(BlockPanelLogic blockPanelLogic) {
-        this.blockPanelLogic = blockPanelLogic;
+    public void setBlockPanel(BottomBlockLogic bottomBlockLogic) {
+        this.bottomBlockLogic = bottomBlockLogic;
     }
 
     public boolean checkBlockAll(Array<BaseBlockActor> allNotUse) {
@@ -235,6 +233,7 @@ public class GameView extends Group {
     }
 
     private  boolean canPlaceAt(int[][] board, int[][] block, int startX, int startY) {
+        //位置x y 是否存在被挡住的
         for (int i = 0; i < block.length; i++) {
             for (int j = 0; j < block[0].length; j++) {
                 if (block[i][j] == 1) {

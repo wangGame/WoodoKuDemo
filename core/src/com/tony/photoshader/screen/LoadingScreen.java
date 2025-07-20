@@ -11,6 +11,7 @@ import com.kw.gdx.screen.BaseScreen;
 @ScreenResource("cocos/LoadingScreen.json")
 public class LoadingScreen extends BaseScreen {
     private float time = 0;
+
     public LoadingScreen(BaseGame game) {
         super(game);
     }
@@ -19,7 +20,7 @@ public class LoadingScreen extends BaseScreen {
     public void render(float delta) {
         super.render(delta);
         time += delta;
-        if (time > 0){
+        if (time > 0) {
             time = -Integer.MIN_VALUE;
             setScreen(WoodokuScreen.class);
         }

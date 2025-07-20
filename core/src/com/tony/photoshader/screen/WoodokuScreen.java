@@ -13,14 +13,14 @@ import com.kw.gdx.constant.Constant;
 import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.tony.photoshader.block.BaseBlockActor;
-import com.tony.photoshader.view.BlockGroup;
-import com.tony.photoshader.view.BlockPanelLogic;
+import com.tony.photoshader.view.BottomBlockItem;
+import com.tony.photoshader.view.BottomBlockLogic;
 import com.tony.photoshader.view.GameView;
 
 @ScreenResource("cocos/GameScreen.json")
 public class WoodokuScreen extends BaseScreen {
     private GameView gameView;
-    private BlockPanelLogic blockPanelLogic;
+    private BottomBlockLogic bottomBlockLogic;
     public WoodokuScreen(BaseGame game) {
         super(game);
     }
@@ -36,18 +36,16 @@ public class WoodokuScreen extends BaseScreen {
                 gameBoard.getWidth()/2f,
                 gameBoard.getHeight()/2f, Align.center);
 
-        blockPanelLogic = new BlockPanelLogic(gameView,rootView);
-        blockPanelLogic.setBlock();
+        bottomBlockLogic = new BottomBlockLogic(gameView,rootView);
+        bottomBlockLogic.setBlock();
+        gameView.setBlockPanel(bottomBlockLogic);
 
-        gameView.setBlockPanel(blockPanelLogic);
-
-        Actor click = new Actor();
-        click.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
-        addActor(click);
-        click.addListener(new ClickListener(){
+        Actor userTouchPanel = new Actor();
+        userTouchPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        addActor(userTouchPanel);
+        userTouchPanel.addListener(new ClickListener(){
             private Vector2 touchDownV2 = new Vector2();
             private BaseBlockActor targetBlock;
-            private Vector2 touchDown = new Vector2();
             private Vector2 offTouch = new Vector2(0,199);
             private Vector2 positionTargetV2  = new Vector2();
 
@@ -55,17 +53,16 @@ public class WoodokuScreen extends BaseScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 boolean b = super.touchDown(event, x, y, pointer, button);
                 touchDownV2.set(x,y);
-                click.getParent().localToStageCoordinates(touchDownV2);
-                BlockGroup blockGroup = blockPanelLogic.checkTouch(touchDownV2);
-                if (blockGroup == null)return b;
-                targetBlock = blockGroup.getBlock();
+                userTouchPanel.getParent().localToStageCoordinates(touchDownV2);
+                BottomBlockItem bottomBlockItem = bottomBlockLogic.checkTouch(touchDownV2);
+                if (bottomBlockItem == null)return b;
+                targetBlock = bottomBlockItem.getBlock();
                 if (targetBlock!=null){
                     targetBlock.stageToLocalCoordinates(touchDownV2);
                 }
-
                 targetBlock.setOrigin(Align.center);
                 targetBlock.setScale(1,1);
-                touchDown.set(x,y);
+
                 return b;
             }
 
@@ -73,9 +70,8 @@ public class WoodokuScreen extends BaseScreen {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (targetBlock!=null) {
-                    System.out.println(targetBlock.getBlockName());
                     positionTargetV2.set(x,y);
-                    click.getParent().localToStageCoordinates(positionTargetV2);
+                    userTouchPanel.getParent().localToStageCoordinates(positionTargetV2);
                     targetBlock.getParent().stageToLocalCoordinates(positionTargetV2);
                     targetBlock.setPosition(positionTargetV2.x-touchDownV2.x+offTouch.x,positionTargetV2.y-touchDownV2.y+offTouch.y);
                     gameView.resetColor();
@@ -89,8 +85,7 @@ public class WoodokuScreen extends BaseScreen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
                 if (targetBlock!=null) {
-                    boolean b = checkBlock(targetBlock, gameView);
-                    if (b) {
+                    if (checkBlock(targetBlock, gameView)) {
                         gameView.addTagetBlock(targetBlock);
                     }else {
                         targetBlock.addAction(
@@ -99,7 +94,7 @@ public class WoodokuScreen extends BaseScreen {
                                         Actions.scaleTo(0.6f,0.6f,0.1f)
                                 )
                         );
-                        if (!checkAll()) {
+                        if (!checkAllBlock()) {
                             setScreen(WoodokuScreen.class);
                         }
                     }
@@ -109,8 +104,8 @@ public class WoodokuScreen extends BaseScreen {
         });
     }
 
-    public boolean checkAll(){
-        Array<BaseBlockActor> allNotUse = blockPanelLogic.getAllNotUse();
+    public boolean checkAllBlock(){
+        Array<BaseBlockActor> allNotUse = bottomBlockLogic.getAllNotUse();
         return gameView.checkBlockAll(allNotUse);
     }
 

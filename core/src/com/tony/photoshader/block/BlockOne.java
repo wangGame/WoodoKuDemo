@@ -1,10 +1,9 @@
 package com.tony.photoshader.block;
 
-public class BlockOne extends BaseBlockActor{
-/**
- *  **
- *
- */
+public class BlockOne extends BaseBlockActor {
+    /**
+     * **
+     */
 
     @Override
     public void initData() {

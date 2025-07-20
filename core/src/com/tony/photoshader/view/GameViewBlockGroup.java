@@ -13,7 +13,7 @@ import com.tony.photoshader.constant.Constant;
 public class GameViewBlockGroup extends Group {
     private Label label;
     private BlockItem blockItem;
-    private Image kuang;
+    private Image tipKUang;
 
     public GameViewBlockGroup(){
         setSize(Constant.blockWidth,Constant.blockWidth);
@@ -23,13 +23,13 @@ public class GameViewBlockGroup extends Group {
         bg.setSize(getWidth(),getWidth());
         bg.setPosition(getWidth()/2f,getWidth()/2f, Align.center);
 
-        kuang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
-        addActor(kuang);
+        tipKUang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
+        addActor(tipKUang);
 
-        kuang.setSize(Constant.blockWidth+30,Constant.blockWidth+30);
-        kuang.setPosition(Constant.blockWidthHalf,Constant.blockWidthHalf, Align.center);
-        kuang.setColor(Color.RED);
-        kuang.getColor().a = 0;
+        tipKUang.setSize(Constant.blockWidth+30,Constant.blockWidth+30);
+        tipKUang.setPosition(Constant.blockWidthHalf,Constant.blockWidthHalf, Align.center);
+        tipKUang.setColor(Color.RED);
+        tipKUang.getColor().a = 0;
         label = new Label(0+"",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("font/Krub-Bold_redStroke_52.fnt");
         }});
@@ -64,10 +64,10 @@ public class GameViewBlockGroup extends Group {
     }
 
     public void setCanMoveColor() {
-        kuang.getColor().a = 1;
+        tipKUang.getColor().a = 1;
     }
 
     public void resetColor() {
-        kuang.getColor().a = 0;
+        tipKUang.getColor().a = 0;
     }
 }
