@@ -1,3 +1,2 @@
-# Woodoku
-
+# Block game by libgdx
 
