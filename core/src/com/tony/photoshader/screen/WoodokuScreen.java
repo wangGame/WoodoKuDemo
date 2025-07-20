@@ -73,6 +73,7 @@ public class WoodokuScreen extends BaseScreen {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (targetBlock!=null) {
+                    System.out.println(targetBlock.getBlockName());
                     positionTargetV2.set(x,y);
                     click.getParent().localToStageCoordinates(positionTargetV2);
                     targetBlock.getParent().stageToLocalCoordinates(positionTargetV2);
@@ -95,12 +96,11 @@ public class WoodokuScreen extends BaseScreen {
                         targetBlock.addAction(
                                 Actions.parallel(
                                         Actions.moveToAligned(150,150,Align.center,0.1f),
-                                        Actions.scaleTo(0.8f,0.8f,0.1f)
+                                        Actions.scaleTo(0.6f,0.6f,0.1f)
                                 )
                         );
                         if (!checkAll()) {
                             setScreen(WoodokuScreen.class);
-//                            touchDisable();
                         }
                     }
                     targetBlock = null;

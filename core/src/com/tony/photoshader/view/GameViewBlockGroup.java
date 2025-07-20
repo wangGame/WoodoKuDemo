@@ -25,17 +25,17 @@ public class GameViewBlockGroup extends Group {
 
         kuang = new Image(Asset.getAsset().getTexture("img/kuangxu.png"));
         addActor(kuang);
-        kuang.setColor(Color.GRAY);
+
         kuang.setSize(Constant.blockWidth+30,Constant.blockWidth+30);
         kuang.setPosition(Constant.blockWidthHalf,Constant.blockWidthHalf, Align.center);
         kuang.setColor(Color.RED);
-
+        kuang.getColor().a = 0;
         label = new Label(0+"",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("font/Krub-Bold_redStroke_52.fnt");
         }});
 //        addActor(label);
 
-        blockItem = new BlockItem();
+        blockItem = new BlockItem(null);
         addActor(blockItem);
         blockItem.setPosition(getWidth()/2f,getHeight()/2,Align.center);
         blockItem.setVisible(false);
@@ -45,18 +45,21 @@ public class GameViewBlockGroup extends Group {
         label.setPosition(getWidth()/2f,getHeight()/2f, Align.center);
     }
 
-    public void setLabelValue(int i) {
+    public void setLabelValue(int i, String blockName) {
         label.setText(i+"");
         if (i == 1){
             blockItem.setScale(1,1);
             blockItem.setVisible(true);
-            resetColor();
+            blockItem.changeBlockColor(blockName);
+//            resetColor();
         }
+        setColor(Color.WHITE);
     }
 
     public void resetLabelValue(){
         label.setText("0");
         blockItem.clearActions();
+        blockItem.setOrigin(Align.center);
         blockItem.addAction(Actions.scaleTo(0,0,0.1f));
     }
 

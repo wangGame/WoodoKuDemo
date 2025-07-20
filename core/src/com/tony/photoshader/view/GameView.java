@@ -80,7 +80,7 @@ public class GameView extends Group {
         int startX = Math.abs((int) ((vector2.x+Constant.blockWidthHalf) / Constant.blockWidth));
         int startY = Math.abs((int) ((vector2.y+Constant.blockWidthHalf) / Constant.blockWidth));
         targetBlock.setPosition(vector2.x,vector2.y);
-
+        resetColor();
         targetBlock.addAction(
                 Actions.sequence(
                         Actions.moveTo(startX * Constant.blockWidth,startY * Constant.blockWidth,0.06f),
@@ -94,7 +94,7 @@ public class GameView extends Group {
                                         if (data[i][i1] == 1) {
                                             blockData[endX][endY] = 1;
                                             GameViewBlockGroup gameViewBlockGroup = boardGroup.findActor(endX + "" + endY);
-                                            gameViewBlockGroup.setLabelValue(1);
+                                            gameViewBlockGroup.setLabelValue(1,targetBlock.getBlockName());
                                         }
                                     }
                                 }
@@ -102,7 +102,6 @@ public class GameView extends Group {
                             if (blockPanelLogic.checkStatus()) {
                                 blockPanelLogic.setBlock();
                             }
-
                              checkBlockActor();
                         })
                         ,

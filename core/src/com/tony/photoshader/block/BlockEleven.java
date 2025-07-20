@@ -15,8 +15,10 @@ public class BlockEleven extends BaseBlockActor{
 
     @Override
     public void initData() {
-        arr = new int[2][2];
-        arr[0][0] = 1;arr[0][1] = 1;
-        arr[1][0] = 1;arr[1][1] = 1;
+        blockArrData = new int[2][2];
+        blockArrData[0][0] = 1;
+        blockArrData[0][1] = 1;
+        blockArrData[1][0] = 1;
+        blockArrData[1][1] = 1;
     }
 }
