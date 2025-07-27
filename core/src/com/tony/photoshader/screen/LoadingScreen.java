@@ -34,17 +34,15 @@ public class LoadingScreen extends BaseScreen {
             }
             pack();
         }});
-
-
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-//        time += delta;
-//        if (time > 0) {
-//            time = -Integer.MIN_VALUE;
-//            setScreen(WoodokuScreen.class);
-//        }
+        time += delta;
+        if (time > 0) {
+            time = -Integer.MIN_VALUE;
+            setScreen(WoodokuScreen.class);
+        }
     }
 }

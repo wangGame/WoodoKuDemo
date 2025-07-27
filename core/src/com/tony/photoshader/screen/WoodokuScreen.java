@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -14,6 +15,7 @@ import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.tony.photoshader.block.BaseBlockActor;
 import com.tony.photoshader.constant.BConstant;
+import com.tony.photoshader.score.BScore;
 import com.tony.photoshader.view.BottomBlockItem;
 import com.tony.photoshader.view.BottomBlockLogic;
 import com.tony.photoshader.view.GameView;
@@ -42,6 +44,12 @@ public class WoodokuScreen extends BaseScreen {
         bottomBlockLogic.setBlock();
         gameView.setBlockPanel(bottomBlockLogic);
 
+        Label maxScoreLabel = rootView.findActor("maxScoreLabel");
+        Label currentScore = rootView.findActor("currentScore");
+        BScore instance = BScore.getInstance();
+        instance.setMaxLabel(maxScoreLabel);
+        instance.setScoreLabel(currentScore);
+
         Actor userTouchPanel = new Actor();
         userTouchPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         addActor(userTouchPanel);
@@ -58,6 +66,7 @@ public class WoodokuScreen extends BaseScreen {
                 userTouchPanel.getParent().localToStageCoordinates(touchDownV2);
                 BottomBlockItem bottomBlockItem = bottomBlockLogic.checkTouch(touchDownV2);
                 if (bottomBlockItem == null)return b;
+                if (bottomBlockItem.checkUsed())return b;
                 targetBlock = bottomBlockItem.getBlock();
                 if (targetBlock!=null){
                     targetBlock.stageToLocalCoordinates(touchDownV2);
@@ -89,7 +98,7 @@ public class WoodokuScreen extends BaseScreen {
                 if (targetBlock!=null) {
                     if (checkBlock(targetBlock, gameView)) {
                         gameView.addTagetBlock(targetBlock);
-                        BConstant.score+=targetBlock.getScore();
+                        BScore.getInstance().updateScore(targetBlock.getScore());
                     }else {
                         targetBlock.addAction(
                                 Actions.parallel(

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 import com.tony.photoshader.block.BaseBlockActor;
 import com.tony.photoshader.constant.BConstant;
+import com.tony.photoshader.score.BScore;
 
 public class GameView extends Group {
     private int[][] blockData;
@@ -138,8 +139,10 @@ public class GameView extends Group {
                 shuizhi.add(i);
             }
         }
-
-        BConstant.score+= (shuizhi.size + shuiping.size) * BConstant.currentScoreBs;
+        addAction(Actions.delay(0.3f,Actions.run(()->{
+            int scoreValue = (shuizhi.size + shuiping.size) * BConstant.currentScoreBs;
+            BScore.getInstance().updateScore(scoreValue);
+        })));
         if (shuiping.size>0 ||shuizhi.size>0){
             BConstant.currentScoreBs += 10;
         }

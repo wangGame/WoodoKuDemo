@@ -55,6 +55,18 @@ public class BottomBlockLogic {
         // 尝试所有组合，找出一个能依次放下的三个块组合
         Array<Array<BaseBlockActor>> array = new Array<>();
 //        先随机
+        {
+            System.out.println("yuanl de ");
+            int[][] board = gameView.getBoardCopy();
+            for (int i = 0; i < board.length; i++) {
+                for (int i1 = 0; i1 < board[0].length; i1++) {
+                    System.out.print(board[i1][board.length-1-i]+"     ");
+                }
+                System.out.println();
+            }
+            System.out.println("======================");
+        }
+
         for (int i = 0; i < 5; i++) {
             for (int i1 = 0; i1 < 5; i1++) {
                 for (int i2 = 0; i2 < 5; i2++) {
@@ -145,18 +157,30 @@ public class BottomBlockLogic {
         int br = block.length;
         int bc = block[0].length;
 
-        for (int y = 0; y <= rows - br; y++) {
-            for (int x = 0; x <= cols - bc; x++) {
+        for (int y = 0; y <= rows - bc; y++) {
+            for (int x = 0; x <= cols - br; x++) {
                 if (canPlaceAt(board, block, x, y)) {
                     int[][] placed =  deepCopy(board);
-                    for (int i = 0; i < br; i++) {
-                        for (int j = 0; j < bc; j++) {
-                            if (block[i][j] == 1) {
+                    for (int i = 0; i < bc; i++) {
+                        for (int j = 0; j < br; j++) {
+                            if (block[j][i] == 1) {
                                 placed[y + i][x + j] = 1;
                             }
                         }
                     }
                     placed = clearFullLines(placed);
+
+                    {
+                        System.out.println("=======jjjj de ");
+                        for (int i = 0; i < board.length; i++) {
+                            for (int i1 = 0; i1 < board[0].length; i1++) {
+                                System.out.print(placed[i1][board.length-1-i]+"     ");
+                            }
+                            System.out.println();
+                        }
+                        System.out.println("======================");
+                    }
+
                     PlacementResult result = new PlacementResult();
                     result.success = true;
                     result.newBoard = placed;
@@ -224,9 +248,9 @@ public class BottomBlockLogic {
 
 
     private static boolean canPlaceAt(int[][] board, int[][] block, int startX, int startY) {
-        for (int i = 0; i < block.length; i++) {
-            for (int j = 0; j < block[0].length; j++) {
-                if (block[i][j] == 1) {
+        for (int i = 0; i < block[0].length; i++) {
+            for (int j = 0; j < block.length; j++) {
+                if (block[j][i] == 1) {
                     if (board[startY + i][startX + j] != 0) return false;
                 }
             }
