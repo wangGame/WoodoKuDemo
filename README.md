@@ -1,6 +1,5 @@
 # Woodoku
 
-## 块
 
 ```typescript
 toytypes: [{
